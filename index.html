@@ -88,6 +88,36 @@ nav{
 }
 .nsocial:hover{border-color:var(--purple);color:#fff;background:rgba(139,92,246,.15)}
 
+/* ── PDF EXPORT BUTTON ── */
+#pdf-btn{
+  position:fixed;bottom:2rem;right:2rem;z-index:500;
+  display:flex;align-items:center;gap:.6rem;
+  padding:.85rem 1.5rem;
+  background:linear-gradient(135deg,var(--purple),var(--blue));
+  color:#fff;border:none;border-radius:50px;
+  font-family:'Outfit',sans-serif;font-weight:600;font-size:.82rem;
+  cursor:none;pointer-events:all;
+  box-shadow:0 8px 30px rgba(139,92,246,.4);
+  transition:all .35s;
+}
+#pdf-btn:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 12px 40px rgba(139,92,246,.6)}
+#pdf-btn:active{transform:translateY(-1px) scale(0.98)}
+#pdf-btn.loading{pointer-events:none;opacity:.7}
+#pdf-btn .spin{display:inline-block;animation:spin360 .8s linear infinite}
+@keyframes spin360{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+#pdf-toast{
+  position:fixed;bottom:6rem;right:2rem;z-index:500;
+  padding:.8rem 1.3rem;background:rgba(16,185,129,.15);
+  border:1px solid rgba(16,185,129,.4);border-radius:8px;
+  color:#10b981;font-size:.78rem;font-weight:500;
+  opacity:0;transform:translateY(10px);transition:all .4s;pointer-events:none;
+}
+#pdf-toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:900px){
+  #pdf-btn{bottom:1.2rem;right:1.2rem;padding:.75rem 1.2rem;font-size:.75rem}
+  #pdf-toast{bottom:5rem;right:1.2rem;left:1.2rem;text-align:center}
+}
+
 /* ── HERO ── */
 #hero{
   min-height:100vh;
@@ -234,6 +264,7 @@ nav{
 }
 .proj-grid{
   display:grid;grid-template-columns:repeat(3,1fr);
+  grid-auto-rows:1fr;
   gap:1.5px;margin-top:3rem;
 }
 .proj-card{
@@ -242,6 +273,7 @@ nav{
   padding:2rem;border-radius:4px;
   transition:all .4s;position:relative;overflow:hidden;
   pointer-events:all;
+  display:flex;flex-direction:column;
 }
 .proj-card:nth-child(1){grid-column:span 2}
 .proj-card::before{
@@ -259,6 +291,19 @@ nav{
 .ptag{padding:.2rem .65rem;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);border-radius:20px;font-size:.63rem;color:var(--purple2)}
 .proj-arr{position:absolute;top:1.5rem;right:1.5rem;color:var(--muted);opacity:0;transform:translate(-4px,4px);transition:all .3s;font-size:.9rem}
 .proj-card:hover .proj-arr{opacity:1;transform:translate(0,0);color:var(--purple2)}
+.live-badge{
+  display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.08em;
+  color:#10b981;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);
+  padding:.25rem .7rem;border-radius:20px;margin-bottom:.9rem;
+}
+.proj-link{
+  display:inline-flex;align-items:center;gap:.4rem;
+  margin-top:1.2rem;padding:.6rem 1.1rem;
+  background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.35);
+  border-radius:6px;color:#10b981;text-decoration:none;
+  font-size:.75rem;font-weight:600;transition:all .3s;
+}
+.proj-link:hover{background:rgba(16,185,129,.2);border-color:#10b981;transform:translateY(-2px)}
 
 /* ── EXPERIENCE ── */
 #experience{
@@ -482,37 +527,52 @@ footer{
 <section id="projects">
   <p class="sec-label sr">Selected Work</p>
   <h2 class="sec-title sr" style="text-align:left">Things I've <em style="font-family:'Instrument Serif';font-style:italic;background:linear-gradient(135deg,#8b5cf6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Shipped</em></h2>
+  <p class="sec-sub sr" style="text-align:left;margin:0 0 2rem">🤖 3 of these apps are live on Google Play Store — download them directly.</p>
   <div class="proj-grid">
     <div class="proj-card sr">
       <div class="proj-num">01 / Featured</div>
-      <div class="proj-ico">✅</div>
-      <div class="proj-name">Daily Task Tracker — Web & Android</div>
-      <div class="proj-desc">A full productivity suite shipped on two platforms. The web app lets users plan and track daily goals from any browser; the native Android version adds push notification reminders so you never miss a task. Built end-to-end solo.</div>
-      <div class="proj-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JavaScript</span><span class="ptag">Android</span><span class="ptag">Java</span><span class="ptag">Notifications</span></div>
+      <span class="live-badge">● LIVE ON PLAY STORE</span>
+      <div class="proj-ico">📋</div>
+      <div class="proj-name">AttendIQ — MRSPTU App</div>
+      <div class="proj-desc">Smart attendance tracking app for MRSPTU college students. Students can view subject-wise attendance, receive low-attendance alerts, and stay on top of their academic records — all from their Android phone.</div>
+      <div class="proj-tags"><span class="ptag">Android App</span><span class="ptag">Education</span><span class="ptag">Firebase</span><span class="ptag">Java</span></div>
+      <a href="https://play.google.com/store/apps/details?id=com.attendiq.user" target="_blank" class="proj-link">▶ Download on Google Play</a>
       <span class="proj-arr">↗</span>
     </div>
     <div class="proj-card sr">
       <div class="proj-num">02</div>
-      <div class="proj-ico">📋</div>
-      <div class="proj-name">Daily Attendance Tracker</div>
-      <div class="proj-desc">Android app to mark, manage, and view daily attendance records with summary reports and push notification reminders — built for students and small institutions.</div>
-      <div class="proj-tags"><span class="ptag">Android Studio</span><span class="ptag">Java</span><span class="ptag">SQLite</span><span class="ptag">Notifications</span></div>
+      <span class="live-badge">● LIVE ON PLAY STORE</span>
+      <div class="proj-ico">✅</div>
+      <div class="proj-name">Daily Task Tracker</div>
+      <div class="proj-desc">A productivity Android app to help users plan, manage and track daily tasks with ease. Add tasks, set priorities, mark completions and stay organised — your personal productivity companion on Android.</div>
+      <div class="proj-tags"><span class="ptag">Android App</span><span class="ptag">Productivity</span><span class="ptag">Task Management</span></div>
+      <a href="https://play.google.com/store/apps/details?id=com.dailytasktracker" target="_blank" class="proj-link">▶ Download on Google Play</a>
       <span class="proj-arr">↗</span>
     </div>
     <div class="proj-card sr">
       <div class="proj-num">03</div>
-      <div class="proj-ico">🎬</div>
-      <div class="proj-name">Netflix Clone</div>
-      <div class="proj-desc">Pixel-perfect front-end clone replicating Netflix's UI/UX with responsive layouts, hover effects, and smooth interactions using vanilla HTML, CSS & JS.</div>
-      <div class="proj-tags"><span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JavaScript</span></div>
+      <span class="live-badge">● LIVE ON PLAY STORE</span>
+      <div class="proj-ico">🍋</div>
+      <div class="proj-name">Chopra Lemon Soda</div>
+      <div class="proj-desc">Full Android ordering app + website for Chopra Lemon Soda. Customers browse the menu, place orders and track them in real time. Firebase-powered backend with live status updates for the owner dashboard.</div>
+      <div class="proj-tags"><span class="ptag">Android App</span><span class="ptag">Website</span><span class="ptag">Real-time Orders</span><span class="ptag">Firebase</span></div>
+      <a href="https://play.google.com/store/apps/details?id=com.chopra.lemon" target="_blank" class="proj-link">▶ Download on Google Play</a>
       <span class="proj-arr">↗</span>
     </div>
     <div class="proj-card sr">
       <div class="proj-num">04</div>
-      <div class="proj-ico">🤖</div>
-      <div class="proj-name">Android App Development — Alpha Innovations</div>
-      <div class="proj-desc">Developed and optimized production-grade Android applications in Java during internship at Alpha Innovations — received a Letter of Recommendation for exceptional performance.</div>
-      <div class="proj-tags"><span class="ptag">Android</span><span class="ptag">Java</span><span class="ptag">Android Studio</span><span class="ptag">Internship</span></div>
+      <div class="proj-ico">🍱</div>
+      <div class="proj-name">Navhar Foods</div>
+      <div class="proj-desc">Full product website with a complete cart and ordering system for a food business. Clean, appetising design with seamless UX for customers browsing products and placing orders online.</div>
+      <div class="proj-tags"><span class="ptag">Website</span><span class="ptag">Cart System</span><span class="ptag">Food & Delivery</span></div>
+      <span class="proj-arr">↗</span>
+    </div>
+    <div class="proj-card sr">
+      <div class="proj-num">05</div>
+      <div class="proj-ico">💼</div>
+      <div class="proj-name">Custom Business Websites</div>
+      <div class="proj-desc">Static and dynamic websites tailored for businesses across industries — portfolios, service companies, local shops and enterprise platforms. Every site is mobile-first, fast and SEO-ready.</div>
+      <div class="proj-tags"><span class="ptag">Static & Dynamic</span><span class="ptag">Custom Design</span><span class="ptag">SEO Ready</span></div>
       <span class="proj-arr">↗</span>
     </div>
   </div>
@@ -567,6 +627,9 @@ footer{
 
 <div class="hero-scroll-hint"><div class="hint-bar"></div>Move mouse · Scroll to explore<div class="hint-bar"></div></div>
 
+<button id="pdf-btn" onclick="exportPortfolioPDF()">📄 <span id="pdf-btn-text">Download Resume</span></button>
+<div id="pdf-toast">✓ Resume downloaded!</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ═══════════════════════════════════════════
@@ -581,7 +644,7 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
   ring.style.cssText+=`left:${rx}px;top:${ry}px`;
   requestAnimationFrame(tick);
 })();
-document.querySelectorAll('a,button,.proj-card,.exp-item,.tech-pill,.clink').forEach(el=>{
+document.querySelectorAll('a,button,.proj-card,.exp-item,.tech-pill,.clink,#pdf-btn,.cert-card').forEach(el=>{
   el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';ring.style.borderColor='rgba(139,92,246,.7)'});
   el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(139,92,246,.5)'});
 });
@@ -856,6 +919,50 @@ document.querySelectorAll('.proj-card').forEach(card=>{
     card.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
   });
 });
+
+// ═══════════════════════════════════════════
+//  RESUME PDF DOWNLOAD — actual resume document
+// ═══════════════════════════════════════════
+const RESUME_PDF_BASE64 = "JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUiAvRjMgNCAwIFIgL0Y0IDUgMCBSCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9OYW1lIC9GMSAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjMgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EtQm9sZCAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjIgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iago0IDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhLU9ibGlxdWUgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YzIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKNSAwIG9iago8PAovQmFzZUZvbnQgL1phcGZEaW5nYmF0cyAvTmFtZSAvRjQgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iago2IDAgb2JqCjw8Ci9Db250ZW50cyAxMSAwIFIgL01lZGlhQm94IFsgMCAwIDU5NS4yNzU2IDg0MS44ODk4IF0gL1BhcmVudCAxMCAwIFIgL1Jlc291cmNlcyA8PAovRm9udCAxIDAgUiAvUHJvY1NldCBbIC9QREYgL1RleHQgL0ltYWdlQiAvSW1hZ2VDIC9JbWFnZUkgXQo+PiAvUm90YXRlIDAgL1RyYW5zIDw8Cgo+PiAKICAvVHlwZSAvUGFnZQo+PgplbmRvYmoKNyAwIG9iago8PAovQ29udGVudHMgMTIgMCBSIC9NZWRpYUJveCBbIDAgMCA1OTUuMjc1NiA4NDEuODg5OCBdIC9QYXJlbnQgMTAgMCBSIC9SZXNvdXJjZXMgPDwKL0ZvbnQgMSAwIFIgL1Byb2NTZXQgWyAvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJIF0KPj4gL1JvdGF0ZSAwIC9UcmFucyA8PAoKPj4gCiAgL1R5cGUgL1BhZ2UKPj4KZW5kb2JqCjggMCBvYmoKPDwKL1BhZ2VNb2RlIC9Vc2VOb25lIC9QYWdlcyAxMCAwIFIgL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjkgMCBvYmoKPDwKL0F1dGhvciAoXChhbm9ueW1vdXNcKSkgL0NyZWF0aW9uRGF0ZSAoRDoyMDI2MDYzMDE4NDYyMiswMCcwMCcpIC9DcmVhdG9yIChcKHVuc3BlY2lmaWVkXCkpIC9LZXl3b3JkcyAoKSAvTW9kRGF0ZSAoRDoyMDI2MDYzMDE4NDYyMiswMCcwMCcpIC9Qcm9kdWNlciAoUmVwb3J0TGFiIFBERiBMaWJyYXJ5IC0gXChvcGVuc291cmNlXCkpIAogIC9TdWJqZWN0IChcKHVuc3BlY2lmaWVkXCkpIC9UaXRsZSAoXChhbm9ueW1vdXNcKSkgL1RyYXBwZWQgL0ZhbHNlCj4+CmVuZG9iagoxMCAwIG9iago8PAovQ291bnQgMiAvS2lkcyBbIDYgMCBSIDcgMCBSIF0gL1R5cGUgL1BhZ2VzCj4+CmVuZG9iagoxMSAwIG9iago8PAovRmlsdGVyIFsgL0FTQ0lJODVEZWNvZGUgL0ZsYXRlRGVjb2RlIF0gL0xlbmd0aCAyNTA2Cj4+CnN0cmVhbQpHYiFTbT4+czlHJ1JvNEhTPlFqNlliTSNrOkdwLmM6X09OLzIhbXRDZiRgOFlPRU1ARW0qYi1abihFc1BiSmFxdU9MM0pGInRZJi1IUzQ0TVNUQkdiM3JUdV1HRi9CIzo+dGpiIXQ1aj9GImhGVEw/U3R1ZSJdXS9gYikoLUJ0QSNoLT91XHIzTDQxOEY4My5Ua1hPSktZbDNuUjxhXDgmMzVSaDxqcXVsLV8nO1ctPyRWKyJiNipjIzFObEZfLSFWKSZeUEQmKjlSaS8lXjtIUmstZWlQKWpJUFpJXFw1QSE8O0J0RDZUIVFpQ2UqND9cQHVhMGp1W25JVU00XSZrPjxSLiJEO2dGQSEsMUo1YjNFJmQ8KihlJz5YOWhZblMxVCktWE0hYExBV0NIXXMmN0dPVTEvW18kXE9gUjU6bUBkWCIpLXMldD8kdUJHTmY8dSsyWl1tLEghWCZBOW9sM1hOJTtJXiFXYm44KzBqWUhgMDInM2ltJTUlIkBCZ1Qqak1CT15qKio+a2kiKk9dQj5yM1ltKHInbk4oZDI0U1NPYDIwcTcnOSxZXj9nXmJoTWRsc0YtJz4wcXJEY3MwXTVVPEI7NkJ0Wk1raWJGQVNDdTxUNWUkbmZqTDwyXmBGTUhMWW1mTSoiPjZaJzhkcittTylYJittV0I7NDRjZV0zL2R1M2JOX2Y5WlIyX1p0T1kldExBZV5gOiUrVVpwIUcxUmFgPF9SdFgkZEVDXCQqRFk7U04uXFAvS0EsWy0tPTRbSkspSUU9VEsyVShKRDdqcSg4I05QX01pVjY1JTFfYztwPFQ8bnBicTMuWSIrLy5pSFMiPjRyO2E/YTE4Xm0zPFJDUWY6KHFdRiVcXVRJNCcubFNydT5aV140YTc8ZDEsPC5UKGUjcSRibT0qWlNvJ1ImPT5jNC5iU2BAdU4/czQrWEBkMk1QJENeKUFTbzk1c1xALzxJLltJISQkbENaLiItS0JqSk4+T20pPEUiRl9VMEY9NV0qMjQ3WDFRPiUqbCdSNUQjZG5tYy9cOC9KbUlAYE9gLj1GW3VWWjtCXSU7N2EpPzFSSDhOQlpGXzQ7TiJjQ0E3OTUuM1JGMXA4cVhIbV9YQjZoRUgmVWYzS2xnYURULDFKYDNdayRERj4rVFtCWU90bDUpYUUvSmAxUCFfamNTQ2dWTkIhUlE1clAzckAqN2VodDY0TlMsb1gyQ0AkNVcxVHJoM2NyMU0sRFYzOTkyaW1eNFBmT0NrNEhoIytGPisnQk9bTVJMUDw8U1w/clU7RUBPIUo6M21HVkExdSwwcjJTY2xWYjtYM2lGN0xTJzBMYWFAI2leRVRRTFwqZkMxVW1kPFVCPSgnUWxMTlpTXzZVI3Vqby47RTVuIkBmYltnX09zVjteO1o8KTNkVi00TXM1V15pWXMlJS1TY1Y6JCFbWS5BZS8pLHQmJixObk9JYkdncWBwMl9gVz9waGo3M0whNDQ0cnNbTHA5LVBabCFvNkUiVDZPQD9OQGREUzxNRk5CYmJbOihPcWgiJWI0QU5RKkokPGJVMCtFKTpmQzdzTThALUw8LyhVSjwmMy5HO3EnVDFhO185JGstSVxGbz07VGk4cSctTlMhTXNdYFFPRTs1Mi1nYWNZKlNHUSNeTVcjQm9FWl0vdDxrXS5gcWFYUCc1LEJBPC5JSzpJQlNYcDlQSz1RQyU4OT5rRHVfa1wjJkJiSVsyYzE/XCZHdTclcShITEUyOW00dVovMkVBNiRKYnUmXVVtKSFsL2EqcWlPb15sW1UmPlBFcVRrLSdjRlJ1O2omOjRGNGxsJzhCc09NIkhbOkNlTC5CMSNtSFtkS1owSk8wSjRVN2VUY0o0LyhgbzdWQ0ZvUDgmbFYwLmpqWXJBLl9pM144MyFNVWZgY11ROEZvdWVEdD0iVm5mdCtpQzdvPjpPPG9bXHVTcT00TDJIcF9kOmBxL2NCJG8wRiJdY1k/bCcmTF0vcWBhIzxqXmxtT28xTm9nLkZaXUApNCkvOlZHW2VjdT41cXUtM1o3UmE5aitxKjQ7MzYkWFU2NGZsbzs1SFFjU2subUJxImAqITRQKU5TK0k1OjZLMitJJUVdc1BfYVVQIWtSWmQ1QFMmU3VAXEtZcDNHST41PyJrbjJxMjBiXDs/QGUvXWtscnNOYkciNF9cOEpwbGxORCIsNz8hLSQmK2hPNUYjM0kxTTQ9WTFVYW8mTWphaDNNW2BrQTJyaSo/QCtvJiNaWkw4PExsbWkiSG4iU2ZFO1M5bm9CPjIpUFMiRy9EQzN1YXBNK1skJSpkPEVcWDBNLmRUdSldQlYrSkAhPW48UVtlT1U4ZjVMImphaTlscnBWRypbKGdbJiNLXmk4KystNGA8NmIiMzFJdHUtZkkuTmNCWj9HIXBYPSk2Tls+TztpYCRZbDUkNlVmJEMtXVJwLGNuNTImV2s4WS02VCI8QSVKPS1jLXBXQmhjLj8qVU1Jcm9SNE9INTI5VF1MXkN0RnVlS0U8SDc0ZCQnZXAvTzxSMDlgXlg/JTprODBYTDFqKydwXy9CWSJKIzc4UFlBY3RaMFtXWkJCOXVoS0YsTT5WNj8kdHBOZV01bC0tdS5uQzUudEFCUS9eNi4qXDckYEhVMz5DXyxqJDMkTEJSY2lkNyZVcihcJG1uLicoUSJgYT8hcTdAdTxzI2xTY0pfczVWbzI0QW5FRyVNP2RCa2QyOUk9OWhjO3EkVmByW0FtPVUhNkBuPDhpNFtfV2ZbKGAhdCsqN2U2S1lULD8iaz8oYWBPOzpEKztgMFFkYlgjaGw9ZlRLbioraXBtS2YsRk9JZD4sXmFZKkJPIUtOdV44KDYlLj45MVhOXzwuNFJLaUNWKGdbTTo7RVEpLE9LTFkpSGsncnQvTkBMOystQmclUC1YayRDVTpQZT1NW2k0ZmNLRUIuaUUuYjFuOlJRLjFcaSg8XywqbHA3L2krOzJzaEVJcCxYXyZVIillRCQqQDhBTUUqMmNkV1Uzb08pMCZRZkotcm5JJGVJTjhkdHU5P0FNIUVFTy8/Pzs6JjBnWihLdDlNJ05HLltiQSdpZzVXYypiIV5DaCkzcDBxOS42KTJKZDlnRWZoOTtRYiFDIm8nYVlzYD9tY3I0PjVmYHQsNUg3KzgvPz1LXG8pc2FFTmNOLzw3LSdKXD1lLyNAMyw9YFBlVU1ONGxQT0gqYnRlWztZcEMkV24pTFJuKyw/azQqWlcvPyhmZzdbQUNyUllBcSQlWkRyJkcxcShwSmU6aDZxLDswXlhtTi07RCFdcFNZPUJjXmBqO2xgQDM7T1NDZjdoZn4+ZW5kc3RyZWFtCmVuZG9iagoxMiAwIG9iago8PAovRmlsdGVyIFsgL0FTQ0lJODVEZWNvZGUgL0ZsYXRlRGVjb2RlIF0gL0xlbmd0aCAxNjQ3Cj4+CnN0cmVhbQpHYXUwRGhjbykiJ1JmX1pcNTBgSiIxPmxPRGk1QF5tWFJAKmo2VkNPWW1sZiYxbj5vTTBScyZYWyJ1Nk89Oz0kNiVuWy9RM0BGUlZIUDZjXEhzLCFIM1doPzVpOnRMdGJEJ085UT49IWwlJXM0NEhwPWk5LEpDbEhEOScrLyNrNiIsPmw1XUNDajwqcUZ1cyhrXik7I3QwWTR0O1FwLT5KIUMidDk6WkZfcl9eUVNoKGddKFRVSF0hJmZJSl9uPVUpLiJCOGpgZm0wRSw+PWNpSjByXEBsPSpeVD9NLF8nSm0/Z3RINFBqYl8/RCcuW3JTI0BwZmxNOzhZSVdlRF9DSGsxJ2Y7TlBqYlIxXl82LCciLFM/ajpLay5JQVZOU19maShpQiFmJj9OWVFDKHFHKiVIaVJrQjdeciI5b0JHLiRIaGIralUxRkRSX2o+Kio0LWlJaXRgNCg+cTZoa0pzP1pHL1RbM2pgSk91J1IvQVNxQ05UTElUREdhQ2IqIVIoL0xdW2phbGM4c08sdTBDZWIiRlQrWSs2QSxaUDguKUBhY1dbYy1VK0MsRVViNkJMMjpkKnJiOjgpbmc8MjRFbjdJITY3LENCcSM/Zj8hUEZeJnBqJjZOO1BCanVRXTRORyhvW2lWPm5WcCcpKFhOV3QtRyFCU2hecXJJSDxSK1VeWVdUViMvSG02WEpWVXAvW01UTUFeVywpSU5IKlVnUCVKKVxhQ0Q+YElwdXRebWptMzYkaF0wJl5DOG4pQ0JZQTlZWEVVYmtNWlRUJ2lLUHMuY0hAKFdSUzdYZ105SHBGV2MmS2NsZSI5NWlLUGEyOS1mMzcuNTQjVSQlWiVCO01hOUVkc1ZWTFIlUD9pWClbay00RUhpZWU/TTdCLGI0JCxYUHU4Pi9uTVBRK2xqTmhJcCphMGkzNTcoUHNNXUlkOSRNImguYUdDYEliYGRXdUdrMUlcKU1hVmBncDwoSCcjSHFrR0R0X2BYSlhRUFZDUyMzIltxOzs/KU9ZJEo2Qyo8XDgwTm1YaEYzJk0xP1pOZnVwNV1Dc1giW1AkMytpImctT3IjQlZDOlRiLTBMNGIlYyRFbVMhQ1hub2htOHEsWVlFa2ghN3VBZSJ1aT5FWipFXkwuJ05iSkxoJXJEU1giODQoOCthMzNZLSRFaD9WakhwODwiNExMQEdsRFIrTyg+ZyhpbmRebCU8J1dvaldwNGJJVFpGTnFkT1c1ISI9S3JUWjAvJzQrTERHODdhJTFwPkNPZVAiVClnMW1qcWAhW2F0OC1GcSYvNWhNKWRmQWBvIUNRcWVcMU1OL0VrOiQxOE5gXWFkQ1JPbEAiY1o6RCZWN2w/LFJLIicvV2Amc1pxOD1YK3RLTEdfQjcsN2FPRmdeSVsyaUFnazlqJ0lRMU4+KCIxRzU/ODVpY1tbQyRablRbODBsLV1uKVRYLmJWJmspRW5ZZG1kQUVOLVRWSnFldG44RVImImc9Nzs1TW1IcFlYbCRwMCZaNmpVZWRgL0VgSFcsdT9nRlBBV0dYK1MlOmpTbytiU0ciQzdfTUkpaWBEVCtHYExXT2k7WF8pLEpncElnOEgnMCI7KjtGQ0B1L2lZZE5AJkw6OFVEaiJgXk4sa1wnTHU7VCI7XzhkJGJWTHEtNyxrOEQoYlRSWGRBRS4+UlFbYltLM0VUYFopUVF0PiFvdHA9IUopKTQ/MDlRTVtTOEleSmVqX0xYUENpYi8pMnV1L1dCT0okKz1rbE9JQiciRTgpS1liaHJdJTNROThPPDQ8WClwU2tJbSxWJjYlLjByOXFAYi9cUFtpNWltR3AvYWUycEkmT19CZzxDTzdLT1o1NydYMDc9V0tEaC9IKF5aO0xjVHFPOENCPTInVzgvPSNMa2AsWzlHbXFMaEYnWmomJVA6IVQkKk5yKCJsYlBydGAsWmVaSmcrQC5zKmpfQUZvdURzKXA9ISdTU10oSihcOT0zJmpjSyk+akoiXFY7Yz0jMi1GSD1BZyw2TFs2RlFJQXFKYmd0Z04zT0ZkIkJrZE5nYE10XXEiQFAvOzpGdUcwIjgzP2Q8UzItRHI4Sz9HS2VOLkl0biRzNUpFaDtuMHQpLSxrYExXbWFlQEJDciMoVmhGLyk4O09xLSU6T1FRNzEyRXI6Q21yNikpJ1E1YCZvOWpmdShYVXErJD9tfj5lbmRzdHJlYW0KZW5kb2JqCnhyZWYKMCAxMwowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwNjEgMDAwMDAgbiAKMDAwMDAwMDEyMiAwMDAwMCBuIAowMDAwMDAwMjI5IDAwMDAwIG4gCjAwMDAwMDAzNDEgMDAwMDAgbiAKMDAwMDAwMDQ1NiAwMDAwMCBuIAowMDAwMDAwNTM5IDAwMDAwIG4gCjAwMDAwMDA3NDQgMDAwMDAgbiAKMDAwMDAwMDk0OSAwMDAwMCBuIAowMDAwMDAxMDE4IDAwMDAwIG4gCjAwMDAwMDEyOTggMDAwMDAgbiAKMDAwMDAwMTM2NCAwMDAwMCBuIAowMDAwMDAzOTYyIDAwMDAwIG4gCnRyYWlsZXIKPDwKL0lEIApbPDFkNzNhMTI2NzE4MWZhN2NkZWE2YzUzMDYyZjVlY2FkPjwxZDczYTEyNjcxODFmYTdjZGVhNmM1MzA2MmY1ZWNhZD5dCiUgUmVwb3J0TGFiIGdlbmVyYXRlZCBQREYgZG9jdW1lbnQgLS0gZGlnZXN0IChvcGVuc291cmNlKQoKL0luZm8gOSAwIFIKL1Jvb3QgOCAwIFIKL1NpemUgMTMKPj4Kc3RhcnR4cmVmCjU3MDEKJSVFT0YK";
+
+function exportPortfolioPDF(){
+  const btn = document.getElementById('pdf-btn');
+  const btnText = document.getElementById('pdf-btn-text');
+  const toast = document.getElementById('pdf-toast');
+  const originalText = btnText.textContent;
+
+  btn.classList.add('loading');
+  btnText.innerHTML = '<span class="spin">⟳</span> Preparing…';
+
+  try {
+    const byteChars = atob(RESUME_PDF_BASE64);
+    const byteNumbers = new Array(byteChars.length);
+    for (let i = 0; i < byteChars.length; i++) {
+      byteNumbers[i] = byteChars.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Brijesh_Jain_Resume.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+    toast.textContent = '✓ Resume downloaded!';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  } catch (err) {
+    console.error('Resume download failed:', err);
+    alert('Sorry, something went wrong downloading the resume. Please try again.');
+  } finally {
+    btn.classList.remove('loading');
+    btnText.textContent = originalText;
+  }
+}
 </script>
 </body>
 </html>
